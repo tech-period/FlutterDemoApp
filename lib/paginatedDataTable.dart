@@ -12,6 +12,8 @@ class PaginatedDataTablePage extends StatefulWidget {
 }
 
 class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
+  List<String> columnName = ['Row', 'A', 'B', 'C', 'D'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,22 +24,21 @@ class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
         minWidth: 600,
         rowsPerPage: 20,
         columns: [
-          DataColumn(
-            label: Text('Column A'),
-            // size: ColumnSize.L,
+          DataColumn2(
+            label: Text(columnName[0]),
+            size: ColumnSize.S,
           ),
-          DataColumn(
-            label: Text('Column B'),
+          DataColumn2(
+            label: Text(columnName[1]),
           ),
-          DataColumn(
-            label: Text('Column C'),
+          DataColumn2(
+            label: Text(columnName[2]),
           ),
-          DataColumn(
-            label: Text('Column D'),
+          DataColumn2(
+            label: Text(columnName[3]),
           ),
-          DataColumn(
-            label: Text('Column NUMBERS'),
-            numeric: true,
+          DataColumn2(
+            label: Text(columnName[4]),
           ),
         ],
         source: SampleDataSource(),
@@ -48,16 +49,17 @@ class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
 
 /// テーブルのデータ
 class SampleDataSource extends DataTableSource {
+  List<String> columnName = ['A', 'B', 'C', 'D'];
   @override
   DataRow getRow(int index) {
     /// 1行文のデータ
     return DataRow(cells: [
       // 中身のデータは DataCell として追加する
-      DataCell(Text('$index')),
-      DataCell(Text('Cell A$index')),
-      DataCell(Text('Cell B$index')),
-      DataCell(Text('Cell C$index')),
-      DataCell(Text('Cell D$index')),
+      DataCell(Text((index + 1).toString())),
+      DataCell(Text('Cell ' + columnName[0] + (index + 1).toString())),
+      DataCell(Text('Cell ' + columnName[1] + (index + 1).toString())),
+      DataCell(Text('Cell ' + columnName[2] + (index + 1).toString())),
+      DataCell(Text('Cell ' + columnName[3] + (index + 1).toString())),
     ]);
   }
 

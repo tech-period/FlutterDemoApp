@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class CounterPage extends StatefulWidget {
   CounterPage({Key? key, required this.title}) : super(key: key);
@@ -11,6 +12,7 @@ class CounterPage extends StatefulWidget {
 
 class _CounterPageState extends State<CounterPage> {
   int _counter = 0;
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   void _incrementCounter() {
     setState(() {
