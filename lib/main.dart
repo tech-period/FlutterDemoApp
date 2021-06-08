@@ -1,3 +1,4 @@
+import 'package:demoapp/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -33,7 +34,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  var listItem = ['Counter', 'PaginatedDataTable'];
+  var listItem = ['Counter', 'PaginatedDataTable','Chat'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +70,13 @@ class _MainPageState extends State<MainPage> {
                           MaterialPageRoute(
                             builder: (context) => PaginatedDataTablePage(
                                 title: "PaginatedTablePage"),
+                          ));
+                      break;
+                    case 'Chat':
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FirebaseChatPage(),
                           ));
                       break;
                     default:
