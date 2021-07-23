@@ -1,6 +1,8 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:data_table_2/paginated_data_table_2.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 
@@ -42,37 +44,91 @@ class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
       body: PaginatedDataTable2(
         minWidth: 600,
         rowsPerPage: 20,
-        header: Text('Header Text'),
+        header:
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        child: Column(
+                          children: [
+                              Text('date1\'s duration'),
+                              Row(
+                                children: [
+                                  TextButton(
+                                      onPressed: () => _selectDate(context),
+                                      child: Text(DateFormat('yyyy/MM/dd').format(_date))
+                                  ),
+                                  Text(' ~ '),
+                                  TextButton(
+                                      onPressed: () => _selectDate(context),
+                                      child: Text(DateFormat('yyyy/MM/dd').format(_date))
+                                  ),
+                                ],
+                              )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        child: Column(
+                          children: [
+                            Text('date2\'s duration'),
+                            Row(
+                              children: [
+                                TextButton(
+                                    onPressed: () => _selectDate(context),
+                                    child: Text(DateFormat('yyyy/MM/dd').format(_date))
+                                ),
+                                Text(' ~ '),
+                                TextButton(
+                                    onPressed: () => _selectDate(context),
+                                    child: Text(DateFormat('yyyy/MM/dd').format(_date))
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        child: Column(
+                          children: [
+                            Text('Delete only',style: TextStyle(fontSize: 10),),
+                            ElevatedButton(
+                              child: Text('Update'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.orange,
+                                onPrimary: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        child: Column(
+                          children: [
+                            Text('Delete only',style: TextStyle(fontSize: 10),),
+                            Switch(value: val, onChanged: (val){
+                              setState(() {
+                                this.val = !this.val;
+                              });
+                            },),
+                          ],
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        items: columnName.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ) ,
         actions: [
-          TextButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Date1:' + DateFormat('yyyy/MM/dd').format(_date))
-          ),
-          TextButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Date2:' + DateFormat('yyyy/MM/dd').format(_date.add(Duration(days: 30))))
-          ),
-          ElevatedButton(
-            child: const Text('Button'),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.orange,
-              onPrimary: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-          Switch(value: val, onChanged: (val){
-            setState(() {
-              this.val = !this.val;
-            });
-          },),
-          DropdownButton<String>(
-              items: columnName.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-          ),
         ],
         fit: FlexFit.tight,
         showFirstLastButtons: true,
