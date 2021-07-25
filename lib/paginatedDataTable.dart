@@ -1,7 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:data_table_2/paginated_data_table_2.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
@@ -49,9 +49,30 @@ class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
                     children: [
                       Container(
                         margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        width: 180,
+                        child:
+                          TextFormField(
+                            maxLines: 1,
+                            decoration: InputDecoration(labelText: 'Text'),
+                          ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+                        width: 80,
+                        child:
+                        TextFormField(
+                          maxLines: 1,
+                          // maxLength: 5,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(5)],
+                          decoration: InputDecoration(labelText: 'int'),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
                         child: Column(
                           children: [
-                              Text('date1\'s duration'),
+                              Text('date1\'s duration', style: TextStyle(fontSize: 12),),
                               Row(
                                 children: [
                                   TextButton(
@@ -72,7 +93,7 @@ class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
                         padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
                         child: Column(
                           children: [
-                            Text('date2\'s duration'),
+                            Text('date2\'s duration', style: TextStyle(fontSize: 12),),
                             Row(
                               children: [
                                 TextButton(
@@ -89,46 +110,46 @@ class _PaginatedDataTablePageState extends State<PaginatedDataTablePage> {
                           ],
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
-                        child: Column(
-                          children: [
-                            Text('Delete only',style: TextStyle(fontSize: 10),),
-                            ElevatedButton(
-                              child: Text('Update'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.orange,
-                                onPrimary: Colors.white,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
-                        child: Column(
-                          children: [
-                            Text('Delete only',style: TextStyle(fontSize: 10),),
-                            Switch(value: val, onChanged: (val){
-                              setState(() {
-                                this.val = !this.val;
-                              });
-                            },),
-                          ],
-                        ),
-                      ),
-                      DropdownButton<String>(
-                        items: columnName.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
+                      // DropdownButton<String>(
+                      //   items: columnName.map<DropdownMenuItem<String>>((String value) {
+                      //     return DropdownMenuItem<String>(
+                      //       value: value,
+                      //       child: Text(value),
+                      //     );
+                      //   }).toList(),
+                      // ),
                     ],
                   ) ,
         actions: [
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+            child: Column(
+              children: [
+                Text('Delete only',style: TextStyle(fontSize: 10),),
+                Switch(value: val, onChanged: (val){
+                  setState(() {
+                    this.val = !this.val;
+                  });
+                },),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
+            child: Column(
+              children: [
+                Text('Delete only',style: TextStyle(fontSize: 10),),
+                ElevatedButton(
+                  child: Text('Update'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.orange,
+                    onPrimary: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
         ],
         fit: FlexFit.tight,
         showFirstLastButtons: true,
